@@ -26,3 +26,15 @@ C:\Users\Wysek\Documents\Visual Studio 2010\Projects\backup\BOGIm\obj\x86\Debug\
 C:\Users\Wysek\Documents\Visual Studio 2010\Projects\backup\BOGIm\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\Wysek\Documents\Visual Studio 2010\Projects\lena\bogim\BOGIm\obj\x86\Debug\BOGIm.exe
 C:\Users\Wysek\Documents\Visual Studio 2010\Projects\lena\bogim\BOGIm\obj\x86\Debug\BOGIm.pdb
+D:\Projects\Visual Studio 2010\bogim\BOGIm\obj\x86\Debug\BOGIm.exe
+D:\Projects\Visual Studio 2010\bogim\BOGIm\obj\x86\Debug\BOGIm.pdb
+D:\Projects\Visual Studio 2010\bogim\BOGIm\bin\Debug\BOGIm.exe
+D:\Projects\Visual Studio 2010\bogim\BOGIm\bin\Debug\BOGIm.pdb
+D:\Projects\Visual Studio 2010\bogim\BOGIm\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Projects\Visual Studio 2010\bogim\BOGIm\obj\x86\Debug\BOGIm.About.resources
+D:\Projects\Visual Studio 2010\bogim\BOGIm\obj\x86\Debug\BOGIm.MainWindow.resources
+D:\Projects\Visual Studio 2010\bogim\BOGIm\obj\x86\Debug\BOGIm.PodajIloscKlasHistogramuG.resources
+D:\Projects\Visual Studio 2010\bogim\BOGIm\obj\x86\Debug\BOGIm.PodajWartoscGamma.resources
+D:\Projects\Visual Studio 2010\bogim\BOGIm\obj\x86\Debug\BOGIm.Properties.Resources.resources
+D:\Projects\Visual Studio 2010\bogim\BOGIm\obj\x86\Debug\GenerateResource.read.1.tlog
+D:\Projects\Visual Studio 2010\bogim\BOGIm\obj\x86\Debug\GenerateResource.write.1.tlog

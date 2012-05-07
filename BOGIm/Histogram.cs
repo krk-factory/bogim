@@ -21,9 +21,13 @@ namespace BOGIm
 
         public const int iloscOdcieniSzarosci = 256;
 
+        private MainWindow mw;
+
         /* --- Metody Klasy --- */
-        public Histogram(Bitmap obraz)
+        public Histogram(Bitmap obraz, MainWindow mw)
         {
+            this.mw = mw;
+            
             this.obrazWe = obraz;
 
             obrazWy = new Bitmap(obrazWe.Width, obrazWe.Height);
@@ -56,6 +60,13 @@ namespace BOGIm
                     wartosciHistogramu[obrazWe.GetPixel(k1, k2).R]++;
                 }
             }
+
+            // --- Histogra We ---
+            for (int k = 0; k < iloscOdcieniSzarosci; k++)
+            {
+                mw.chartHistoWe.Series["Series1"].Points.AddY(wartosciHistogramu[k]);
+            }
+            //--------------------
 
             int n = obrazWe.Width * obrazWe.Height;
 
@@ -97,6 +108,23 @@ namespace BOGIm
                     obrazWy.SetPixel(i, j, c);
                 }
             }
+
+            // --- Histogra Wy ---
+            for (int k1 = 0; k1 < obrazWy.Height; k1++)
+            {
+                for (int k2 = 0; k2 < obrazWy.Width; k2++)
+                {
+                    wartosciHistogramu[obrazWy.GetPixel(k1, k2).R]++;
+                }
+            }
+
+            for (int k = 0; k < iloscOdcieniSzarosci; k++)
+            {
+                mw.chartHistoWy.Series["Series1"].Points.AddY(wartosciHistogramu[k]);
+            }
+
+            //--------------------
+
             return obrazWy;
         }
 

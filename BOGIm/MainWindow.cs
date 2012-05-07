@@ -42,7 +42,7 @@ namespace BOGIm
             string sciezkaPliku;
             OpenFileDialog ofd = new OpenFileDialog();
 
-            ofd.InitialDirectory = @"C:\";
+            //ofd.InitialDirectory = @"C:\";
             ofd.Filter = "Pliki graficzne (*.jpg)|*.jpg|Pliki graficzne (*.gif)|*.gif|Pliki graficzne (*.tif)|*.tif|Wszystkie pliki (*.*)|*.*";
             ofd.FilterIndex = 2;
             ofd.RestoreDirectory = true;
@@ -127,7 +127,7 @@ namespace BOGIm
         {
             SaveFileDialog sfd = new SaveFileDialog();
 
-            sfd.InitialDirectory = @"C:\";
+            //sfd.InitialDirectory = @"C:\";
             sfd.Filter = "Pliki graficzne (*.jpg)|*.jpg|Pliki graficzne (*.gif)|*.gif|Pliki graficzne (*.tif)|*.tif|Wszystkie pliki (*.*)|*.*";
             sfd.FilterIndex = 2;
             sfd.RestoreDirectory = true;
@@ -169,7 +169,7 @@ namespace BOGIm
 
         private void globalneWyrownanieHistogramuToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Histogram h = new Histogram(obrazWejsciowy);
+            Histogram h = new Histogram(obrazWejsciowy, this);
 
             PodajIloscKlasHistogramuG pikhg = new PodajIloscKlasHistogramuG();
             pikhg.ShowDialog();
@@ -180,14 +180,11 @@ namespace BOGIm
 
                 obrazWyjsciowyPictureBox.Image = h.wyrownajHistogramGlobalnie(iloscKlasH);
             }
+
+
         }
 
         private void lokalneWyrownanieHistogramuToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void chart2_Click(object sender, EventArgs e)
         {
 
         }
