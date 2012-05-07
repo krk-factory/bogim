@@ -28,6 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.plikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wczytajPlikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,9 +50,13 @@
             this.obrazWyjsciowyPictureBox = new System.Windows.Forms.PictureBox();
             this.obrazWejsciowyLabel = new System.Windows.Forms.Label();
             this.obrazWyjsciowyLabel = new System.Windows.Forms.Label();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.obrazWejsciowyPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.obrazWyjsciowyPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -144,8 +154,7 @@
             // 
             // obrazWejsciowyPictureBox
             // 
-            this.obrazWejsciowyPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.obrazWejsciowyPictureBox.Location = new System.Drawing.Point(12, 73);
+            this.obrazWejsciowyPictureBox.Location = new System.Drawing.Point(12, 57);
             this.obrazWejsciowyPictureBox.Name = "obrazWejsciowyPictureBox";
             this.obrazWejsciowyPictureBox.Size = new System.Drawing.Size(256, 256);
             this.obrazWejsciowyPictureBox.TabIndex = 1;
@@ -153,8 +162,7 @@
             // 
             // obrazWyjsciowyPictureBox
             // 
-            this.obrazWyjsciowyPictureBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.obrazWyjsciowyPictureBox.Location = new System.Drawing.Point(305, 73);
+            this.obrazWyjsciowyPictureBox.Location = new System.Drawing.Point(305, 57);
             this.obrazWyjsciowyPictureBox.Name = "obrazWyjsciowyPictureBox";
             this.obrazWyjsciowyPictureBox.Size = new System.Drawing.Size(256, 256);
             this.obrazWyjsciowyPictureBox.TabIndex = 2;
@@ -180,11 +188,48 @@
             this.obrazWyjsciowyLabel.TabIndex = 4;
             this.obrazWyjsciowyLabel.Text = "Obraz wynikowy";
             // 
+            // chart1
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Enabled = false;
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(13, 320);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(255, 300);
+            this.chart1.TabIndex = 5;
+            this.chart1.Text = "chart1";
+            // 
+            // chart2
+            // 
+            chartArea2.Name = "ChartArea1";
+            this.chart2.ChartAreas.Add(chartArea2);
+            legend2.Enabled = false;
+            legend2.Name = "Legend1";
+            this.chart2.Legends.Add(legend2);
+            this.chart2.Location = new System.Drawing.Point(305, 320);
+            this.chart2.Name = "chart2";
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chart2.Series.Add(series2);
+            this.chart2.Size = new System.Drawing.Size(256, 300);
+            this.chart2.TabIndex = 6;
+            this.chart2.Text = "chart2";
+            this.chart2.Click += new System.EventHandler(this.chart2_Click);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(573, 341);
+            this.ClientSize = new System.Drawing.Size(573, 638);
+            this.Controls.Add(this.chart2);
+            this.Controls.Add(this.chart1);
             this.Controls.Add(this.obrazWyjsciowyLabel);
             this.Controls.Add(this.obrazWejsciowyLabel);
             this.Controls.Add(this.obrazWyjsciowyPictureBox);
@@ -200,6 +245,8 @@
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.obrazWejsciowyPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.obrazWyjsciowyPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -223,6 +270,8 @@
         private System.Windows.Forms.Label obrazWyjsciowyLabel;
         private System.Windows.Forms.ToolStripMenuItem zapiszObrazWynikowyToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lokalneWyrownanieHistogramuToolStripMenuItem;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
     }
 }
 
