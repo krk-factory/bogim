@@ -62,6 +62,9 @@ namespace BOGIm
                     obrazWejsciowyPictureBox.Image = obrazWejsciowy;
                     obrazWyjsciowyPictureBox.Image = null;
 
+                    chartHistoWe.Series["Series1"].Points.Clear();
+                    chartHistoWy.Series["Series1"].Points.Clear();
+
                     udostepnianieOperacji(true);
 
                 }

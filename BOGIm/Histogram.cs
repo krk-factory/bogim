@@ -63,7 +63,7 @@ namespace BOGIm
             }
 
             // --- Histogra We ---
-            mw.chartHistoWe.Series["Series1"].Points.Clear();
+            mw.chartHistoWe.Series["Series1"].Points.Clear();       // na wszelki wypadek
             
             for (int k = 0; k < iloscOdcieniSzarosci; k++)
             {
@@ -106,7 +106,7 @@ namespace BOGIm
             }
 
             // --- Histogra Wy ---
-            mw.chartHistoWy.Series["Series1"].Points.Clear();
+            mw.chartHistoWy.Series["Series1"].Points.Clear();       // na wszelki wypadek
 
             for (int k1 = 0; k1 < obrazWy.Height; k1++)
             {
