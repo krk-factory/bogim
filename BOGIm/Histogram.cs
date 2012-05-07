@@ -15,6 +15,7 @@ namespace BOGIm
         private double[] tablicaLUT;
         private double[] wartosciDystrybuanty;
         private int[] wartosciHistogramu;
+        private int[] wartosciHistogramuWy;
 
         private int maxObraz;
         private int iloscKlas;
@@ -36,6 +37,7 @@ namespace BOGIm
             tablicaLUT = new double[iloscOdcieniSzarosci];
 
             wartosciHistogramu = new int[iloscOdcieniSzarosci];
+            wartosciHistogramuWy = new int[iloscOdcieniSzarosci];
         }
 
         public Bitmap wyrownajHistogramLokalnie()
@@ -114,13 +116,13 @@ namespace BOGIm
             {
                 for (int k2 = 0; k2 < obrazWy.Width; k2++)
                 {
-                    wartosciHistogramu[obrazWy.GetPixel(k1, k2).R]++;
+                    wartosciHistogramuWy[obrazWy.GetPixel(k1, k2).R]++;
                 }
             }
 
             for (int k = 0; k < iloscOdcieniSzarosci; k++)
             {
-                mw.chartHistoWy.Series["Series1"].Points.AddY(wartosciHistogramu[k]);
+                mw.chartHistoWy.Series["Series1"].Points.AddY(wartosciHistogramuWy[k]);
             }
 
             //--------------------
