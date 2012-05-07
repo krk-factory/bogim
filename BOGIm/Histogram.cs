@@ -190,7 +190,7 @@ namespace BOGIm
                 }
             }
 
-            // --- Histogra Wy ---
+            // --- Histogram Wy ---
             for (int k1 = 0; k1 < obrazWy.Height; k1++)
             {
                 for (int k2 = 0; k2 < obrazWy.Width; k2++)
