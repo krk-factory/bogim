@@ -10,3 +10,5 @@ D:\Projekty\Visual Studio 2011\BOGIm\BOGIm\obj\x86\Debug\BOGIm.pdb
 D:\Projekty\Visual Studio 2011\BOGIm\BOGIm\obj\x86\Debug\BOGIm.About.resources
 D:\Projekty\Visual Studio 2011\BOGIm\BOGIm\obj\x86\Debug\BOGIm.PodajWartoscGamma.resources
 D:\Projekty\Visual Studio 2011\BOGIm\BOGIm\obj\x86\Debug\BOGIm.PodajIloscKlasHistogramuG.resources
+D:\Projects\Visual Studio 2010\BOGIm\BOGIm\obj\x86\Debug\BOGIm.exe
+D:\Projects\Visual Studio 2010\BOGIm\BOGIm\obj\x86\Debug\BOGIm.pdb
