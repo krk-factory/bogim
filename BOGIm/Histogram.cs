@@ -89,9 +89,8 @@ namespace BOGIm
             }
 
             //final_eq = group_histo(sum_of_hist, this.iloscKlas);
-            double sum = sum_of_hist.Sum();
-            binary_limits = binary_limits_finder(sum_of_hist, sum);
-            final_eq = group_histo(sum_of_hist, binary_limits);
+            binary_limits = binary_limits_finder(sum_of_hist, sum_of_hist.Sum());   //wyznaczenie przedzialow w ktorych mieszcza sie odpowiednie kolory
+            final_eq = group_histo(sum_of_hist, binary_limits); //przesuniecie histogramow do wyznaczonych wczesniej przedzialow
 
             for (int i = 0; i < obrazWe.Height; i++)
             {
@@ -132,38 +131,35 @@ namespace BOGIm
 
         public double[] binary_limits_finder(double[] histo, double sum)
         {
-
-            int temp_val = 256 / iloscKlas;
-            double[] equalized = new double[256];
-            double[] binary_limits = new double[iloscKlas];
-            double percent_part = (double)1 / iloscKlas;
-            double percent_part_floating = percent_part;
+            double[] binary_limits = new double[iloscKlas]; //tablica z limitami
+            double percent_part = (double)1 / iloscKlas;    //skok procentowy z jakim sie poruszamy (np 12,5)
+            double percent_part_floating = percent_part;    //przesuwajacy sie przedzial procentowy (np 12,5->25>37.5)
 
             double foo = 0;
-            int curr_index = 0;
+            int curr_index = 0; //nr przedzialu w ktorym jestesmy
             for (int i = 0; i < 255; i++)
             {
                 foo += histo[i];
-                if (foo/sum > percent_part_floating)
+                if (foo/sum > percent_part_floating)    //sprawdzenie w jakim przedziale miesci sie suma prawdopodobienstw
                 {
-                    percent_part_floating += percent_part;
-                    binary_limits[curr_index++] = i-1;
+                    percent_part_floating += percent_part;  //jezeli juz w nastepnym, to zwieksz przedzial procentowy
+                    binary_limits[curr_index++] = i-1;  //zapisz nr koloru granicznego
                 }
             }
-            binary_limits[iloscKlas - 1] = 255;
-            return binary_limits;
-        }
-
+            binary_limits[iloscKlas - 1] = 255; //ostatni i tak zawsze jest bialy, a niestety petla nigdy do niego nie dojdzie TO FIX
+            return binary_limits;   //funkcja zwraca tablice limitow tzn bin_lim[0] = 101 oznacza, ze wszystkie piksele
+        }                           //do koloru 101 zostana wrzucone do tego samego przedzialu (pokolorowane na ten sam kolor)
+        
         public int[] group_histo(double[] histo, double[] limits)
         {
             int[] new_histo = new int[256];
             int temp_index = 0;
-            int temp_value = 0;
+            int temp_value = 0; //zawsze zaczynamy od zera
             for (int i = 0; i < limits.Length; i++)
             {
                 while (temp_index < limits[i])
-                    new_histo[temp_index++] = temp_value;
-                temp_value = (int)((double)255 / (double)(iloscKlas - (i+1)));
+                    new_histo[temp_index++] = temp_value;   //kolorowanie kolejnych pikseli
+                temp_value = (int)((double)255 / (double)(iloscKlas - (i+1))); //wyznaczamy nowy kolor z wzoru ktory podal Maciek
             }
             return new_histo;
         }
