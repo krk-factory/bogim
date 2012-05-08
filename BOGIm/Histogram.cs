@@ -164,6 +164,32 @@ namespace BOGIm
             return new_histo;
         }
 
+        public static double[] _min_max(double[] dist_func)
+        {
+            double[] answer = new double[2];
+
+            for (int i = 0; i < dist_func.Length; i++)
+            {
+                if (dist_func[i] > 0)
+                {
+                    answer[0] = i;
+                    break;
+                }
+            }
+
+            for (int i = dist_func.Length - 1; i >= 0; i--)
+            {
+                if (dist_func[i] > 0)
+                {
+                    answer[1] = i;
+                    break;
+                }
+            }
+            return answer;
+        }
+
+// ------------------------------ OLDIES --------------------------------------------------------------
+
         /*        public Bitmap wyrownajHistogramGlobalnie(int iloscKlas)
                 {
                     this.iloscKlas = iloscKlas;
@@ -250,29 +276,6 @@ namespace BOGIm
                     return obrazWy;
                 }*/
 
-        public static double[] _min_max(double[] dist_func)
-        {
-            double[] answer = new double[2];
-
-            for (int i = 0; i < dist_func.Length; i++)
-            {
-                if (dist_func[i] > 0)
-                {
-                    answer[0] = i;
-                    break;
-                }
-            }
-
-            for (int i = dist_func.Length - 1; i >= 0; i--)
-            {
-                if (dist_func[i] > 0)
-                {
-                    answer[1] = i;
-                    break;
-                }
-            }
-            return answer;
-        }
 
         /*{
             this.iloscKlas = iloscKlas;

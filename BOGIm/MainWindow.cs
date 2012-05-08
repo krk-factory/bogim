@@ -183,8 +183,6 @@ namespace BOGIm
 
                 obrazWyjsciowyPictureBox.Image = h.wyrownajHistogramGlobalnie(iloscKlasH);
             }
-
-
         }
 
         private void lokalneWyrownanieHistogramuToolStripMenuItem_Click(object sender, EventArgs e)
