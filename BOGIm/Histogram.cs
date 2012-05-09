@@ -63,7 +63,7 @@ namespace BOGIm
                 }
             }
 
-            // --- Histogra We ---
+            // --- Histogram We ---
             mw.chartHistoWe.Series["Series1"].Points.Clear();       // na wszelki wypadek
             
             for (int k = 0; k < iloscOdcieniSzarosci; k++)
@@ -108,7 +108,7 @@ namespace BOGIm
                 }
             }
 
-            // --- Histogra Wy ---
+            // --- Histogram Wy ---
             mw.chartHistoWy.Series["Series1"].Points.Clear();       // na wszelki wypadek
 
             for (int k1 = 0; k1 < obrazWy.Height; k1++)
@@ -129,6 +129,7 @@ namespace BOGIm
             return obrazWy;
         }
 
+        
         public double[] binary_limits_finder(double[] histo, double sum)
         {
             double[] binary_limits = new double[iloscKlas]; //tablica z limitami
@@ -150,6 +151,7 @@ namespace BOGIm
             return binary_limits;   //funkcja zwraca tablice limitow tzn bin_lim[0] = 101 oznacza, ze wszystkie piksele
         }                           //do koloru 101 zostana wrzucone do tego samego przedzialu (pokolorowane na ten sam kolor)
         
+        
         public int[] group_histo(double[] histo, double[] limits)
         {
             int[] new_histo = new int[256];
@@ -164,6 +166,7 @@ namespace BOGIm
             return new_histo;
         }
 
+        
         public static double[] _min_max(double[] dist_func)
         {
             double[] answer = new double[2];
