@@ -28,7 +28,6 @@ namespace BOGIm
         public Histogram(Bitmap obraz, MainWindow mw)
         {
             this.mw = mw;
-            
             this.obrazWe = obraz;
 
             obrazWy = new Bitmap(obrazWe.Width, obrazWe.Height);
@@ -51,7 +50,8 @@ namespace BOGIm
 
             double[] s_hist_eq = new double[256];
             double[] sum_of_hist = new double[256];
-            int[] final_eq = new int[256];
+            //int[] final_eq = new int[256]; 
+            double[] final_eq = new double[256];
             double[] min_max = new double[2];
             double[] binary_limits = new double[iloscKlas];
 
@@ -88,19 +88,15 @@ namespace BOGIm
                 sum_of_hist[i] = sum_of_hist[i - 1] + s_hist_eq[i];
             }
 
-            //final_eq = group_histo(sum_of_hist, this.iloscKlas);
-            binary_limits = binary_limits_finder(sum_of_hist, sum_of_hist.Sum());   //wyznaczenie przedzialow w ktorych mieszcza sie odpowiednie kolory
-            final_eq = group_histo(sum_of_hist, binary_limits); //przesuniecie histogramow do wyznaczonych wczesniej przedzialow
+            binary_limits = binary_limits_finder(sum_of_hist, sum_of_hist.Sum());   // wyznaczenie przedzialow w ktorych mieszcza sie odpowiednie kolory
+            final_eq = group_histo(sum_of_hist, binary_limits);                     // przesuniecie histogramow do wyznaczonych wczesniej przedzialow
 
             for (int i = 0; i < obrazWe.Height; i++)
             {
                 for (int j = 0; j < obrazWe.Width; j++)
                 {
-                    //k = img_data[i][j];
-                    //img_data[i][j] = (unsigned char)round( sum_of_hist[k] * 255.0 );
-
                     c = obrazWe.GetPixel(i, j);
-                    t = final_eq[c.R];
+                    t = (int)final_eq[c.R];
 
                     c = Color.FromArgb(t, t, t);
 
@@ -109,6 +105,7 @@ namespace BOGIm
             }
 
             // --- Histogram Wy ---
+            
             mw.chartHistoWy.Series["Series1"].Points.Clear();       // na wszelki wypadek
 
             for (int k1 = 0; k1 < obrazWy.Height; k1++)
@@ -132,37 +129,52 @@ namespace BOGIm
         
         public double[] binary_limits_finder(double[] histo, double sum)
         {
-            double[] binary_limits = new double[iloscKlas]; //tablica z limitami
-            double percent_part = (double)1 / iloscKlas;    //skok procentowy z jakim sie poruszamy (np 12,5)
-            double percent_part_floating = percent_part;    //przesuwajacy sie przedzial procentowy (np 12,5->25>37.5)
+            double[] binary_limits = new double[iloscKlas-1];           //tablica z limitami --> Limitow powinno byc (iloscKlas-1) - przeciez one powinny podzielic nasz obraz na tyle obszarow, ile wynosi iloscKlas
+            double percent_part = (double)1 / (double)iloscKlas;        //skok procentowy z jakim sie poruszamy (np 12.5)
+            double percent_part_floating = percent_part;                //przesuwajacy sie przedzial procentowy (np 12.5->25>37.5)
 
             double foo = 0;
             int curr_index = 0; //nr przedzialu w ktorym jestesmy
-            for (int i = 0; i < 255; i++)
+            
+            for (int i = 0; i < 256; i++)
             {
                 foo += histo[i];
-                if (foo/sum > percent_part_floating)    //sprawdzenie w jakim przedziale miesci sie suma prawdopodobienstw
+                if (foo/sum > percent_part_floating)        //sprawdzenie w jakim przedziale miesci sie suma prawdopodobienstw
                 {
                     percent_part_floating += percent_part;  //jezeli juz w nastepnym, to zwieksz przedzial procentowy
-                    binary_limits[curr_index++] = i-1;  //zapisz nr koloru granicznego
+                    binary_limits[curr_index++] = i-1;      //zapisz nr koloru granicznego
                 }
             }
-            binary_limits[iloscKlas - 1] = 255; //ostatni i tak zawsze jest bialy, a niestety petla nigdy do niego nie dojdzie TO FIX
+            //binary_limits[iloscKlas - 2] = 255; //ostatni i tak zawsze jest bialy, a niestety petla nigdy do niego nie dojdzie TO FIX
+            
             return binary_limits;   //funkcja zwraca tablice limitow tzn bin_lim[0] = 101 oznacza, ze wszystkie piksele
         }                           //do koloru 101 zostana wrzucone do tego samego przedzialu (pokolorowane na ten sam kolor)
         
         
-        public int[] group_histo(double[] histo, double[] limits)
+        public double[] group_histo(double[] histo, double[] limits)
         {
-            int[] new_histo = new int[256];
+            //int[] new_histo = new int[256];
+            double[] new_histo = new double[256];
             int temp_index = 0;
-            int temp_value = 0; //zawsze zaczynamy od zera
-            for (int i = 0; i < limits.Length; i++)
+            //int temp_value = 0; //zawsze zaczynamy od zera
+            double temp_value = 0;
+
+            for (int i = 0; i <= limits.Length; i++)
             {
-                while (temp_index < limits[i])
-                    new_histo[temp_index++] = temp_value;   //kolorowanie kolejnych pikseli
-                temp_value = (int)((double)255 / (double)(iloscKlas - (i+1))); //wyznaczamy nowy kolor z wzoru ktory podal Maciek
+                if (i < limits.Length)
+                    while (temp_index < limits[i])  // warunek ten nie uwzględniał ostatniego przedziału -> np. 4 klasy, czyli 3 progi binaryzacyjne
+                                                    // --> [0; bin[0]], [bin[0]; bin[1]], [bin[1]; bin[2]]; [bin[2]; 255] => mamy 4 przedziały/klasy
+                        new_histo[temp_index++] = temp_value;   //kolorowanie kolejnych pikseli
+
+                if (i == limits.Length)
+                    while (temp_index < 256)        // ostatni przedział
+                        new_histo[temp_index++] = temp_value;
+                
+                temp_value = ((double)255 / (double)(iloscKlas - (i+1))); //wyznaczamy nowy kolor z wzoru ktory podal Maciek
+
+                //temp_value = ((double)(iloscKlas - i)/(double)(iloscKlas)) * 255;
             }
+            
             return new_histo;
         }
 
@@ -191,9 +203,93 @@ namespace BOGIm
             return answer;
         }
 
+        /*
+//------------------------------- OLD VERSION ---------------------------------------------------------
+
+        public Bitmap wyrownajHistogramGlobalnie(int iloscKlas)
+        {
+            this.iloscKlas = iloscKlas;
+
+            double[] s_hist_eq = new double[256];
+            double[] sum_of_hist = new double[256];
+            double[] final_eq = new double[256];
+            double[] min_max = new double[2];
+
+            for (int k1 = 0; k1 < obrazWe.Height; k1++)
+            {
+                for (int k2 = 0; k2 < obrazWe.Width; k2++)
+                {
+                    wartosciHistogramu[obrazWe.GetPixel(k1, k2).R]++;
+                }
+            }
+
+            // --- Histogra We ---
+            mw.chartHistoWe.Series["Series1"].Points.Clear();       // na wszelki wypadek
+
+            for (int k = 0; k < iloscOdcieniSzarosci; k++)
+            {
+                mw.chartHistoWe.Series["Series1"].Points.AddY(wartosciHistogramu[k]);
+            }
+            //--------------------
+
+            int n = obrazWe.Width * obrazWe.Height;
+
+            for (int i = 0; i < 256; i++)  // pdf of image
+            {
+                s_hist_eq[i] = (double)wartosciHistogramu[i] / (double)n;
+            }
+
+            sum_of_hist[0] = s_hist_eq[0];
+            Color c;
+            int t;
+
+            for (int i = 1; i < 256; i++)	 // cdf of image
+            {
+                sum_of_hist[i] = sum_of_hist[i - 1] + s_hist_eq[i];
+            }
+
+            final_eq = sum_of_hist;
+
+            for (int i = 0; i < obrazWe.Height; i++)
+            {
+                for (int j = 0; j < obrazWe.Width; j++)
+                {
+                    //k = img_data[i][j];
+                    //img_data[i][j] = (unsigned char)round( sum_of_hist[k] * 255.0 );
+
+                    c = obrazWe.GetPixel(i, j);
+                    t = (int)(final_eq[c.R] * 255.0);
+
+                    c = Color.FromArgb(t, t, t);
+
+                    obrazWy.SetPixel(i, j, c);
+                }
+            }
+
+            // --- Histogra Wy ---
+            mw.chartHistoWy.Series["Series1"].Points.Clear();       // na wszelki wypadek
+
+            for (int k1 = 0; k1 < obrazWy.Height; k1++)
+            {
+                for (int k2 = 0; k2 < obrazWy.Width; k2++)
+                {
+                    wartosciHistogramuWy[obrazWy.GetPixel(k1, k2).R]++;
+                }
+            }
+
+            for (int k = 0; k < iloscOdcieniSzarosci; k++)
+            {
+                mw.chartHistoWy.Series["Series1"].Points.AddY(wartosciHistogramuWy[k]);
+            }
+
+            //--------------------
+
+            return obrazWy;
+        }
+
 // ------------------------------ OLDIES --------------------------------------------------------------
 
-        /*        public Bitmap wyrownajHistogramGlobalnie(int iloscKlas)
+               /*public Bitmap wyrownajHistogramGlobalnie(int iloscKlas)
                 {
                     this.iloscKlas = iloscKlas;
 
@@ -277,7 +373,7 @@ namespace BOGIm
                     //--------------------
 
                     return obrazWy;
-                }*/
+                }
 
 
         /*{
