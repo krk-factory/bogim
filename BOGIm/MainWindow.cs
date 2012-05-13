@@ -19,6 +19,7 @@ namespace BOGIm
         private double gammaWartosc;
 
         private int iloscKlasH;
+        private int iloscKlasL;
 
         public MainWindow()
         {
@@ -189,14 +190,14 @@ namespace BOGIm
         {
             Histogram h = new Histogram(obrazWejsciowy, this);
 
-            PodajIloscKlasHistogramuG pikhg = new PodajIloscKlasHistogramuG();
-            pikhg.ShowDialog();
+            PodajIloscKlasHistogramuL pikhl = new PodajIloscKlasHistogramuL();
+            pikhl.ShowDialog();
 
-            if (PodajIloscKlasHistogramuG.operacja == true)
+            if (PodajIloscKlasHistogramuL.operacja == true)
             {
-                iloscKlasH = PodajIloscKlasHistogramuG.iloscKlas;
+                iloscKlasL = PodajIloscKlasHistogramuL.iloscKlas;
 
-                obrazWyjsciowyPictureBox.Image = h.wyrownajHistogramLokalnie(iloscKlasH);
+                obrazWyjsciowyPictureBox.Image = h.wyrownajHistogramLokalnie(iloscKlasL);
             }
         }
     }
