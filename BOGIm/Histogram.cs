@@ -165,11 +165,11 @@ namespace BOGIm
                 if (i < limits.Length)
                     while (temp_index < limits[i])  // warunek ten nie uwzględniał ostatniego przedziału -> np. 4 klasy, czyli 3 progi binaryzacyjne
                                                     // --> [0; bin[0]], [bin[0]; bin[1]], [bin[1]; bin[2]]; [bin[2]; 255] => mamy 4 przedziały/klasy
-                        new_histo[temp_index++] = temp_value;   //kolorowanie kolejnych pikseli
+                        new_histo[temp_index++] = floating_value;   //kolorowanie kolejnych pikseli
 
                 if (i == limits.Length)
                     while (temp_index < 256)        // ostatni przedział
-                        new_histo[temp_index++] = temp_value;
+                        new_histo[temp_index++] = 255;
                 
                 floating_value += temp_value; //wyznaczamy nowy kolor z wzoru ktory podal Maciek
 
