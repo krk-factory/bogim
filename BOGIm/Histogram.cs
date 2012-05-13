@@ -17,10 +17,12 @@ namespace BOGIm
         private double[] wartosciDystrybuanty;
         private int[] wartosciHistogramu;
         private int[] wartosciHistogramuWy;
+        private int[] wartosciHistogramuWy2;
 
         private int iloscKlas;
 
         public const int iloscOdcieniSzarosci = 256;
+        public const int koloBialy = 255;
 
         private MainWindow mw;
 
@@ -37,6 +39,7 @@ namespace BOGIm
 
             wartosciHistogramu = new int[iloscOdcieniSzarosci];
             wartosciHistogramuWy = new int[iloscOdcieniSzarosci];
+            wartosciHistogramuWy2 = new int[iloscOdcieniSzarosci];
         }
 
         public Bitmap wyrownajHistogramLokalnie()
@@ -48,10 +51,10 @@ namespace BOGIm
         {
             this.iloscKlas = iloscKlas;
 
-            double[] s_hist_eq = new double[256];
-            double[] sum_of_hist = new double[256];
+            double[] s_hist_eq = new double[iloscOdcieniSzarosci];
+            double[] sum_of_hist = new double[iloscOdcieniSzarosci];
             //int[] final_eq = new int[256]; 
-            double[] final_eq = new double[256];
+            double[] final_eq = new double[iloscOdcieniSzarosci];
             double[] min_max = new double[2];
             double[] binary_limits = new double[iloscKlas];
 
@@ -74,7 +77,7 @@ namespace BOGIm
 
             int n = obrazWe.Width * obrazWe.Height;
 
-            for (int i = 0; i < 256; i++)  // pdf of image
+            for (int i = 0; i < iloscOdcieniSzarosci; i++)  // pdf of image
             {
                 s_hist_eq[i] = (double)wartosciHistogramu[i] / (double)n;
             }
@@ -83,7 +86,7 @@ namespace BOGIm
             Color c;
             int t;
 
-            for (int i = 1; i < 256; i++)	 // cdf of image
+            for (int i = 1; i < iloscOdcieniSzarosci; i++)	 // cdf of image
             {
                 sum_of_hist[i] = sum_of_hist[i - 1] + s_hist_eq[i];
             }
@@ -135,8 +138,8 @@ namespace BOGIm
 
             double foo = 0;
             int curr_index = 0; //nr przedzialu w ktorym jestesmy
-            
-            for (int i = 0; i < 256; i++)
+
+            for (int i = 0; i < iloscOdcieniSzarosci; i++)
             {
                 foo += histo[i];
                 if (foo/sum > percent_part_floating)        //sprawdzenie w jakim przedziale miesci sie suma prawdopodobienstw
@@ -154,10 +157,10 @@ namespace BOGIm
         public double[] group_histo(double[] histo, double[] limits)
         {
             //int[] new_histo = new int[256];
-            double[] new_histo = new double[256];
+            double[] new_histo = new double[iloscOdcieniSzarosci];
             int temp_index = 0;
             //int temp_value = 0; //zawsze zaczynamy od zera
-            double temp_value = ((double)255 / (double)(iloscKlas - 1));
+            double temp_value = ((double)koloBialy / (double)(iloscKlas - 1));
             double floating_value = 0;
 
             for (int i = 0; i <= limits.Length; i++)
@@ -168,14 +171,11 @@ namespace BOGIm
                         new_histo[temp_index++] = floating_value;   //kolorowanie kolejnych pikseli
 
                 if (i == limits.Length)
-                    while (temp_index < 256)        // ostatni przedział
-                        new_histo[temp_index++] = 255;
+                    while (temp_index < iloscOdcieniSzarosci)        // ostatni przedział
+                        new_histo[temp_index++] = koloBialy;
                 
                 floating_value += temp_value; //wyznaczamy nowy kolor z wzoru ktory podal Maciek
-
-                //temp_value = ((double)(iloscKlas - i)/(double)(iloscKlas)) * 255;
             }
-            
             return new_histo;
         }
 
