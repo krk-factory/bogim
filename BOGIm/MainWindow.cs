@@ -164,6 +164,8 @@ namespace BOGIm
                     }
 
                     fs.Close();
+                    chartHistoWe.SaveImage("chart_we.png", System.Drawing.Imaging.ImageFormat.Png);
+                    chartHistoWy.SaveImage("chart_wy.png", System.Drawing.Imaging.ImageFormat.Png); 
                 }
                 catch (Exception ex)
                 {

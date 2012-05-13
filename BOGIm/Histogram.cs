@@ -77,7 +77,6 @@ namespace BOGIm
             double[] s_hist_eq = new double[iloscOdcieniSzarosci];
             double[] sum_of_hist = new double[iloscOdcieniSzarosci];
             int[] final_eq = new int[iloscOdcieniSzarosci];
-            double[] min_max = new double[2];
             int[] binary_limits = new int[iloscKlas];
             Bitmap obrazWy = new Bitmap(obrazWe.Width, obrazWe.Height);
 
@@ -110,7 +109,6 @@ namespace BOGIm
                 {
                     c = obrazWe.GetPixel(i, j);
                     t = (int)(sum_of_hist[c.R] * 255.0);
-                    if (t > 255) t = 255;
 
                     c = Color.FromArgb(t, t, t);
 
@@ -153,7 +151,7 @@ namespace BOGIm
             double[] s_hist_eq = new double[iloscOdcieniSzarosci];
             double[] sum_of_hist = new double[iloscOdcieniSzarosci];
             int[] final_eq = new int[iloscOdcieniSzarosci];
-            double[] min_max = new double[2];
+            int[] min_max = new int[2];
             int[] binary_limits = new int[iloscKlas];
             Bitmap obrazWy = new Bitmap(obrazWe.Width, obrazWe.Height);
 
@@ -166,16 +164,18 @@ namespace BOGIm
                 for (int k2 = 0; k2 < obrazWe.Width; k2++)
                     wartosciHistogramu[obrazWe.GetPixel(k1, k2).R]++;
 
+            min_max = _min_max(wartosciHistogramu);
+
             int n = obrazWe.Width * obrazWe.Height;
 
-            for (int i = 0; i < iloscOdcieniSzarosci; i++)  // pdf of image
+            for (int i = min_max[0]; i < min_max[1]; i++)  // pdf of image
                 s_hist_eq[i] = (double)wartosciHistogramu[i] / (double)n;
 
-            sum_of_hist[0] = s_hist_eq[0];
+            sum_of_hist[min_max[0]] = s_hist_eq[min_max[0]];
             Color c;
             int t;
 
-            for (int i = 1; i < iloscOdcieniSzarosci; i++)	 // cdf of image
+            for (int i = min_max[1]; i < iloscOdcieniSzarosci; i++)	 // cdf of image
                 sum_of_hist[i] = sum_of_hist[i - 1] + s_hist_eq[i];
 
             for (int i = 0; i < obrazWe.Height; i++)
@@ -184,7 +184,6 @@ namespace BOGIm
                 {
                     c = obrazWe.GetPixel(i, j);
                     t = (int)(sum_of_hist[c.R] * 255.0);
-                    if (t > 255) t = 255;
 
                     c = Color.FromArgb(t, t, t);
 
@@ -294,9 +293,9 @@ namespace BOGIm
         }
 
 
-        public static double[] _min_max(double[] dist_func)
+        public static int[] _min_max(int[] dist_func)
         {
-            double[] answer = new double[2];
+            int[] answer = new int[2];
 
             for (int i = 0; i < dist_func.Length; i++)
             {
