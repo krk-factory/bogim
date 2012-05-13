@@ -199,6 +199,7 @@ namespace BOGIm
                         new_histo[temp_index++] = kolorBialy;
                 
                 floating_value += temp_value; //wyznaczamy nowy kolor z wzoru ktory podal Maciek
+
             }
             return new_histo;
         }
