@@ -187,7 +187,17 @@ namespace BOGIm
 
         private void lokalneWyrownanieHistogramuToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Histogram h = new Histogram(obrazWejsciowy, this);
 
+            PodajIloscKlasHistogramuG pikhg = new PodajIloscKlasHistogramuG();
+            pikhg.ShowDialog();
+
+            if (PodajIloscKlasHistogramuG.operacja == true)
+            {
+                iloscKlasH = PodajIloscKlasHistogramuG.iloscKlas;
+
+                obrazWyjsciowyPictureBox.Image = h.wyrownajHistogramLokalnie(iloscKlasH);
+            }
         }
     }
 }
