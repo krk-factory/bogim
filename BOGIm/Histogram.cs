@@ -34,11 +34,6 @@ namespace BOGIm
 
             wartosciDystrybuanty = new double[iloscOdcieniSzarosci];
             tablicaLUT = new double[iloscOdcieniSzarosci];
-
-            wartosciHistogramu = new int[iloscOdcieniSzarosci];
-            wartosciHistogramuWy = new int[iloscOdcieniSzarosci];
-            wartosciHistogramuWy2 = new int[iloscOdcieniSzarosci];
-            wartosciHistogramuWy3 = new int[iloscOdcieniSzarosci];
         }
 
         public Bitmap wyrownajHistogramLokalnie(int iloscKlas, int rozmiarBloku)
@@ -55,10 +50,11 @@ namespace BOGIm
                     for (int k = i; k < i + rozmiarBloku; k++)
                         for (int l = j; l < j + rozmiarBloku; l++)
                             obrazWe_temp2.SetPixel(k % rozmiarBloku, l % rozmiarBloku, obrazWe.GetPixel(k, l));
-                    obrazWe = new Bitmap(rozmiarBloku, rozmiarBloku);
                     obrazWe = obrazWe_temp2;
 
                     Bitmap obrazwy_temp = wyrownajHistogramGlobalnie(iloscKlas);
+                    //Bitmap obrazwy_temp = obrazWe;
+
                     for (int k = i; k < i + rozmiarBloku; k++)
                         for (int l = j; l < j + rozmiarBloku; l++)
                             obrazWy.SetPixel(k, l, obrazwy_temp.GetPixel(k % rozmiarBloku, l % rozmiarBloku));
@@ -81,6 +77,11 @@ namespace BOGIm
             double[] min_max = new double[2];
             int[] binary_limits = new int[iloscKlas];
             Bitmap obrazWy = new Bitmap(obrazWe.Width, obrazWe.Height);
+
+            wartosciHistogramu = new int[iloscOdcieniSzarosci];
+            wartosciHistogramuWy = new int[iloscOdcieniSzarosci];
+            wartosciHistogramuWy2 = new int[iloscOdcieniSzarosci];
+            wartosciHistogramuWy3 = new int[iloscOdcieniSzarosci];
 
             for (int k1 = 0; k1 < obrazWe.Height; k1++)
                 for (int k2 = 0; k2 < obrazWe.Width; k2++)

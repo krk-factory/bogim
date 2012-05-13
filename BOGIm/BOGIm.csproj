@@ -68,9 +68,7 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\..\..\Desktop\Histogram.cs">
-      <Link>Histogram.cs</Link>
-    </Compile>
+    <Compile Include="Histogram.cs" />
     <Compile Include="KorekcjaGamma.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
