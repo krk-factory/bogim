@@ -42,6 +42,8 @@ namespace BOGIm
             Bitmap obrazWe_temp2;
             Bitmap obrazWy = new Bitmap(obrazWe.Width, obrazWe.Height);
 
+            calculate_histogram_in();
+
             for (int i = 0; i < obrazWe.Height; i += rozmiarBloku)
             {
                 for (int j = 0; j < obrazWe.Width; j += rozmiarBloku)
@@ -52,7 +54,7 @@ namespace BOGIm
                             obrazWe_temp2.SetPixel(k % rozmiarBloku, l % rozmiarBloku, obrazWe.GetPixel(k, l));
                     obrazWe = obrazWe_temp2;
 
-                    Bitmap obrazwy_temp = wyrownajHistogramGlobalnie(iloscKlas);
+                    Bitmap obrazwy_temp = wyrownajHistogramGlobalnie_ver2(iloscKlas);
                     //Bitmap obrazwy_temp = obrazWe;
 
                     for (int k = i; k < i + rozmiarBloku; k++)
@@ -64,6 +66,7 @@ namespace BOGIm
                     mw.label1.Refresh();
                 }
             }
+            calculate_histogram_out(obrazWy);
             return obrazWy;
         }
 
@@ -87,12 +90,7 @@ namespace BOGIm
                 for (int k2 = 0; k2 < obrazWe.Width; k2++)
                     wartosciHistogramu[obrazWe.GetPixel(k1, k2).R]++;
 
-            // --- Histogram We ---
-            mw.chartHistoWe.Series["Series1"].Points.Clear();       // na wszelki wypadek
-
-            for (int k = 0; k < iloscOdcieniSzarosci; k++)
-                mw.chartHistoWe.Series["Series1"].Points.AddY(wartosciHistogramu[k]);
-            //--------------------
+            calculate_histogram_in();
 
             int n = obrazWe.Width * obrazWe.Height;
 
@@ -143,19 +141,107 @@ namespace BOGIm
             }
 
             calculate_histogram_out(obrazWy);
+            mw.label1.Text = "";
 
             return obrazWy;
         }
 
-        private void calculate_histogram_out(Bitmap obrazWy)
+        public Bitmap wyrownajHistogramGlobalnie_ver2(int iloscKlas)
         {
+            this.iloscKlas = iloscKlas;
+
+            double[] s_hist_eq = new double[iloscOdcieniSzarosci];
+            double[] sum_of_hist = new double[iloscOdcieniSzarosci];
+            int[] final_eq = new int[iloscOdcieniSzarosci];
+            double[] min_max = new double[2];
+            int[] binary_limits = new int[iloscKlas];
+            Bitmap obrazWy = new Bitmap(obrazWe.Width, obrazWe.Height);
+
+            wartosciHistogramu = new int[iloscOdcieniSzarosci];
+            wartosciHistogramuWy = new int[iloscOdcieniSzarosci];
+            wartosciHistogramuWy2 = new int[iloscOdcieniSzarosci];
+            wartosciHistogramuWy3 = new int[iloscOdcieniSzarosci];
+
+            for (int k1 = 0; k1 < obrazWe.Height; k1++)
+                for (int k2 = 0; k2 < obrazWe.Width; k2++)
+                    wartosciHistogramu[obrazWe.GetPixel(k1, k2).R]++;
+
+            int n = obrazWe.Width * obrazWe.Height;
+
+            for (int i = 0; i < iloscOdcieniSzarosci; i++)  // pdf of image
+                s_hist_eq[i] = (double)wartosciHistogramu[i] / (double)n;
+
+            sum_of_hist[0] = s_hist_eq[0];
+            Color c;
+            int t;
+
+            for (int i = 1; i < iloscOdcieniSzarosci; i++)	 // cdf of image
+                sum_of_hist[i] = sum_of_hist[i - 1] + s_hist_eq[i];
+
+            for (int i = 0; i < obrazWe.Height; i++)
+            {
+                for (int j = 0; j < obrazWe.Width; j++)
+                {
+                    c = obrazWe.GetPixel(i, j);
+                    t = (int)(sum_of_hist[c.R] * 255.0);
+                    if (t > 255) t = 255;
+
+                    c = Color.FromArgb(t, t, t);
+
+                    obrazWy.SetPixel(i, j, c);
+                }
+            }
+
+            // --- Histogram Wy ---
+
             for (int k1 = 0; k1 < obrazWy.Height; k1++)
                 for (int k2 = 0; k2 < obrazWy.Width; k2++)
-                    wartosciHistogramuWy3[obrazWy.GetPixel(k1, k2).R]++;
+                    wartosciHistogramuWy[obrazWy.GetPixel(k1, k2).R]++;
+
+            binary_limits = binary_limits_finder(wartosciHistogramuWy, wartosciHistogramuWy.Sum());   // wyznaczenie przedzialow w ktorych mieszcza sie odpowiednie kolory
+            wartosciHistogramuWy2 = group_histo(wartosciHistogramuWy, binary_limits);                 // przesuniecie histogramow do wyznaczonych wczesniej przedzialow
+
+            for (int i = 0; i < obrazWe.Height; i++)
+            {
+                for (int j = 0; j < obrazWe.Width; j++)
+                {
+                    c = obrazWy.GetPixel(i, j);
+                    t = wartosciHistogramuWy2[c.R];
+
+                    c = Color.FromArgb(t, t, t);
+
+                    obrazWy.SetPixel(i, j, c);
+                }
+            }
+            return obrazWy;
+        }
+
+        private void calculate_histogram_in()
+        {
+            int[] wartosciHistogramu_we = new int[iloscOdcieniSzarosci];
+
+            for (int k1 = 0; k1 < obrazWe.Height; k1++)
+                for (int k2 = 0; k2 < obrazWe.Width; k2++)
+                    wartosciHistogramu_we[obrazWe.GetPixel(k1, k2).R]++;
+            // --- Histogram We ---
+            mw.chartHistoWe.Series["Series1"].Points.Clear();       // na wszelki wypadek
+
+            for (int k = 0; k < iloscOdcieniSzarosci; k++)
+                mw.chartHistoWe.Series["Series1"].Points.AddY(wartosciHistogramu_we[k]);
+            //--------------------
+        }
+
+        private void calculate_histogram_out(Bitmap obrazWy)
+        {
+            int[] war_hist = new int[iloscOdcieniSzarosci];
+
+            for (int k1 = 0; k1 < obrazWy.Height; k1++)
+                for (int k2 = 0; k2 < obrazWy.Width; k2++)
+                    war_hist[obrazWy.GetPixel(k1, k2).R]++;
 
             mw.chartHistoWy.Series["Series1"].Points.Clear();       // na wszelki wypadek
             for (int k = 0; k < iloscOdcieniSzarosci; k++)
-                mw.chartHistoWy.Series["Series1"].Points.AddY(wartosciHistogramuWy3[k]);
+                mw.chartHistoWy.Series["Series1"].Points.AddY(war_hist[k]);
         }
 
 
