@@ -68,13 +68,9 @@
     <Compile Include="About.Designer.cs">
       <DependentUpon>About.cs</DependentUpon>
     </Compile>
-    <Compile Include="PodajIloscKlasHistogramuL.cs">
-      <SubType>Form</SubType>
+    <Compile Include="..\..\..\..\..\Desktop\Histogram.cs">
+      <Link>Histogram.cs</Link>
     </Compile>
-    <Compile Include="PodajIloscKlasHistogramuL.Designer.cs">
-      <DependentUpon>PodajIloscKlasHistogramuL.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Histogram.cs" />
     <Compile Include="KorekcjaGamma.cs" />
     <Compile Include="MainWindow.cs">
       <SubType>Form</SubType>
@@ -88,6 +84,12 @@
     <Compile Include="PodajIloscKlasHistogramuG.Designer.cs">
       <DependentUpon>PodajIloscKlasHistogramuG.cs</DependentUpon>
     </Compile>
+    <Compile Include="PodajIloscKlasHistogramuL.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PodajIloscKlasHistogramuL.Designer.cs">
+      <DependentUpon>PodajIloscKlasHistogramuL.cs</DependentUpon>
+    </Compile>
     <Compile Include="PodajWartoscGamma.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,14 +101,14 @@
     <EmbeddedResource Include="About.resx">
       <DependentUpon>About.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PodajIloscKlasHistogramuL.resx">
-      <DependentUpon>PodajIloscKlasHistogramuL.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PodajIloscKlasHistogramuG.resx">
       <DependentUpon>PodajIloscKlasHistogramuG.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PodajIloscKlasHistogramuL.resx">
+      <DependentUpon>PodajIloscKlasHistogramuL.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="PodajWartoscGamma.resx">
       <DependentUpon>PodajWartoscGamma.cs</DependentUpon>

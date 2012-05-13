@@ -44,37 +44,25 @@ namespace BOGIm
             wartosciHistogramuWy3 = new int[iloscOdcieniSzarosci];
         }
 
-        public Bitmap wyrownajHistogramLokalnie(int iloscKlas)
+        public Bitmap wyrownajHistogramLokalnie(int iloscKlas, int rozmiarBloku)
         {
             Bitmap obrazWe_temp=obrazWe;
             Bitmap obrazWe_temp2;
-            int pp = obrazWe.Height;
-            int kk = obrazWe.Width;
-            int licznik1=0,licznik2=0;
-            for (int i = 0; i < pp; i += 16)
-                for (int j = 0; j < kk; j += 16)
+
+            for (int i = 0; i < obrazWe.Height; i += rozmiarBloku)
+                for (int j = 0; j < obrazWe.Width; j += rozmiarBloku)
                 {
-                    if (j >= i)
-                    {
-                        obrazWe_temp2 = new Bitmap(16, 16);
-                        for (int k = i; k < i + 16; k++)
-                        {
-                            for (int l = j; l < j + 16; l++)
-                            {
-                                obrazWe_temp2.SetPixel(licznik1, licznik2, obrazWe.GetPixel(k, l));
-                                licznik2++;
-                            }
-                            licznik1++;
-                            licznik2 = 0;
-                        }
-                            
-                        obrazWe = new Bitmap(16, 16);
+                        obrazWe_temp2 = new Bitmap(rozmiarBloku, rozmiarBloku);
+                        for (int k = i; k < i + rozmiarBloku; k++)
+                            for (int l = j; l < j + rozmiarBloku; l++)
+                                obrazWe_temp2.SetPixel(k%rozmiarBloku, l%rozmiarBloku, obrazWe.GetPixel(k, l));
+                        obrazWe = new Bitmap(rozmiarBloku, rozmiarBloku);
                         obrazWe = obrazWe_temp2;
                         Bitmap obrazwy_temp=wyrownajHistogramGlobalnie(8);
                         licznik1 = 0; licznik2 = 0;
-                        for (int k = i; k < i + 16; k++)
+                        for (int k = i; k < i + rozmiarBloku; k++)
                         {
-                            for (int l = j; l < j + 16; l++)
+                            for (int l = j; l < j + rozmiarBloku; l++)
                             {
                                 obrazWy.SetPixel(k, l, obrazwy_temp.GetPixel(licznik1, licznik2));
                                 licznik2++;
@@ -84,10 +72,7 @@ namespace BOGIm
                         }
                         licznik1 = 0;
                         obrazWe = obrazWe_temp;
-                    }
-                    
                 }
-
              return obrazWy;
         }
 
@@ -113,26 +98,20 @@ namespace BOGIm
             mw.chartHistoWe.Series["Series1"].Points.Clear();       // na wszelki wypadek
             
             for (int k = 0; k < iloscOdcieniSzarosci; k++)
-            {
                 mw.chartHistoWe.Series["Series1"].Points.AddY(wartosciHistogramu[k]);
-            }
             //--------------------
 
             int n = obrazWe.Width * obrazWe.Height;
 
             for (int i = 0; i < iloscOdcieniSzarosci; i++)  // pdf of image
-            {
                 s_hist_eq[i] = (double)wartosciHistogramu[i] / (double)n;
-            }
 
             sum_of_hist[0] = s_hist_eq[0];
             Color c;
             int t;
 
             for (int i = 1; i < iloscOdcieniSzarosci; i++)	 // cdf of image
-            {
                 sum_of_hist[i] = sum_of_hist[i - 1] + s_hist_eq[i];
-            }
 
             for (int i = 0; i < obrazWe.Height; i++)
             {
@@ -153,12 +132,8 @@ namespace BOGIm
             mw.chartHistoWy.Series["Series1"].Points.Clear();       // na wszelki wypadek
 
             for (int k1 = 0; k1 < obrazWy.Height; k1++)
-            {
                 for (int k2 = 0; k2 < obrazWy.Width; k2++)
-                {
                     wartosciHistogramuWy[obrazWy.GetPixel(k1, k2).R]++;
-                }
-            }
 
             binary_limits = binary_limits_finder(wartosciHistogramuWy, wartosciHistogramuWy.Sum());   // wyznaczenie przedzialow w ktorych mieszcza sie odpowiednie kolory
             wartosciHistogramuWy2 = group_histo(wartosciHistogramuWy, binary_limits);                 // przesuniecie histogramow do wyznaczonych wczesniej przedzialow
@@ -177,18 +152,12 @@ namespace BOGIm
             }
 
             for (int k1 = 0; k1 < obrazWy.Height; k1++)
-            {
                 for (int k2 = 0; k2 < obrazWy.Width; k2++)
-                {
                     wartosciHistogramuWy3[obrazWy.GetPixel(k1, k2).R]++;
-                }
-            }
+
 
             for (int k = 0; k < iloscOdcieniSzarosci; k++)
-            {
                 mw.chartHistoWy.Series["Series1"].Points.AddY(wartosciHistogramuWy3[k]);
-            }
-
 
             return obrazWy;
         }
