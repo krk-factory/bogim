@@ -157,7 +157,8 @@ namespace BOGIm
             double[] new_histo = new double[256];
             int temp_index = 0;
             //int temp_value = 0; //zawsze zaczynamy od zera
-            double temp_value = 0;
+            double temp_value = ((double)255 / (double)(iloscKlas - 1));
+            double floating_value = 0;
 
             for (int i = 0; i <= limits.Length; i++)
             {
@@ -170,7 +171,7 @@ namespace BOGIm
                     while (temp_index < 256)        // ostatni przedział
                         new_histo[temp_index++] = temp_value;
                 
-                temp_value = ((double)255 / (double)(iloscKlas - (i+1))); //wyznaczamy nowy kolor z wzoru ktory podal Maciek
+                floating_value += temp_value; //wyznaczamy nowy kolor z wzoru ktory podal Maciek
 
                 //temp_value = ((double)(iloscKlas - i)/(double)(iloscKlas)) * 255;
             }
