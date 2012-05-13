@@ -31,6 +31,8 @@
             this.histInfoLabel = new System.Windows.Forms.Label();
             this.potwierdzButton = new System.Windows.Forms.Button();
             this.ileKlasTextBox = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.ileBlokowTextBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // histInfoLabel
@@ -44,7 +46,7 @@
             // 
             // potwierdzButton
             // 
-            this.potwierdzButton.Location = new System.Drawing.Point(147, 41);
+            this.potwierdzButton.Location = new System.Drawing.Point(77, 127);
             this.potwierdzButton.Name = "potwierdzButton";
             this.potwierdzButton.Size = new System.Drawing.Size(75, 23);
             this.potwierdzButton.TabIndex = 4;
@@ -54,25 +56,43 @@
             // 
             // ileKlasTextBox
             // 
-            this.ileKlasTextBox.Location = new System.Drawing.Point(12, 41);
+            this.ileKlasTextBox.Location = new System.Drawing.Point(61, 38);
             this.ileKlasTextBox.Name = "ileKlasTextBox";
             this.ileKlasTextBox.Size = new System.Drawing.Size(105, 20);
             this.ileKlasTextBox.TabIndex = 3;
             // 
-            // PodajIloscKlasHistogramuG
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(33, 67);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(170, 26);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Podaj rozmiar bloku, którym będzie\r\nwyrównywany histogram";
+            // 
+            // ileBlokowTextBox
+            // 
+            this.ileBlokowTextBox.Location = new System.Drawing.Point(61, 96);
+            this.ileBlokowTextBox.Name = "ileBlokowTextBox";
+            this.ileBlokowTextBox.Size = new System.Drawing.Size(105, 20);
+            this.ileBlokowTextBox.TabIndex = 6;
+            // 
+            // PodajIloscKlasHistogramuL
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(234, 72);
+            this.ClientSize = new System.Drawing.Size(234, 162);
             this.ControlBox = false;
+            this.Controls.Add(this.ileBlokowTextBox);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.potwierdzButton);
             this.Controls.Add(this.ileKlasTextBox);
             this.Controls.Add(this.histInfoLabel);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(250, 110);
+            this.MaximumSize = new System.Drawing.Size(250, 200);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(250, 110);
-            this.Name = "PodajIloscKlasHistogramuG";
+            this.MinimumSize = new System.Drawing.Size(250, 200);
+            this.Name = "PodajIloscKlasHistogramuL";
             this.ShowIcon = false;
             this.Text = "Podaj ilość klas - histogram globalny";
             this.ResumeLayout(false);
@@ -85,5 +105,7 @@
         private System.Windows.Forms.Label histInfoLabel;
         private System.Windows.Forms.Button potwierdzButton;
         private System.Windows.Forms.TextBox ileKlasTextBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox ileBlokowTextBox;
     }
 }

@@ -20,6 +20,7 @@ namespace BOGIm
 
         private int iloscKlasH;
         private int iloscKlasL;
+        private int iloscBlokowL;
 
         public MainWindow()
         {
@@ -193,12 +194,13 @@ namespace BOGIm
             PodajIloscKlasHistogramuL pikhl = new PodajIloscKlasHistogramuL();
             pikhl.ShowDialog();
 
-            if (PodajIloscKlasHistogramuL.operacja == true)
+            if (PodajIloscKlasHistogramuL.operacja == true && PodajIloscKlasHistogramuL.operacja_b == true)
             {
                 iloscKlasL = PodajIloscKlasHistogramuL.iloscKlas;
-
-                obrazWyjsciowyPictureBox.Image = h.wyrownajHistogramLokalnie(iloscKlasL);
+                iloscBlokowL = PodajIloscKlasHistogramuL.iloscBlokow;
+                obrazWyjsciowyPictureBox.Image = h.wyrownajHistogramLokalnie(iloscKlasL,iloscBlokowL);
             }
+
         }
     }
 }
