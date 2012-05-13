@@ -190,6 +190,12 @@
             // 
             // chartHistoWe
             // 
+            chartArea1.AxisX.IsStartedFromZero = false;
+            chartArea1.AxisX.MajorGrid.Enabled = false;
+            chartArea1.AxisX.MajorTickMark.Enabled = false;
+            chartArea1.AxisX.Minimum = -50D;
+            chartArea1.AxisY.MajorGrid.Enabled = false;
+            chartArea1.AxisY.MajorTickMark.Enabled = false;
             chartArea1.Name = "ChartArea1";
             this.chartHistoWe.ChartAreas.Add(chartArea1);
             legend1.Enabled = false;
@@ -207,6 +213,12 @@
             // 
             // chartHistoWy
             // 
+            chartArea2.AxisX.IsStartedFromZero = false;
+            chartArea2.AxisX.MajorGrid.Enabled = false;
+            chartArea2.AxisX.MajorTickMark.Enabled = false;
+            chartArea2.AxisX.Minimum = -50D;
+            chartArea2.AxisY.MajorGrid.Enabled = false;
+            chartArea2.AxisY.MajorTickMark.Enabled = false;
             chartArea2.Name = "ChartArea1";
             this.chartHistoWy.ChartAreas.Add(chartArea2);
             legend2.Enabled = false;
