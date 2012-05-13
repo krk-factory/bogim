@@ -198,9 +198,8 @@ namespace BOGIm
             {
                 iloscKlasL = PodajIloscKlasHistogramuL.iloscKlas;
                 iloscBlokowL = PodajIloscKlasHistogramuL.iloscBlokow;
-                obrazWyjsciowyPictureBox.Image = h.wyrownajHistogramLokalnie(iloscKlasL,iloscBlokowL);
+                obrazWyjsciowyPictureBox.Image = h.wyrownajHistogramLokalnie(iloscKlasL, iloscBlokowL);
             }
-
         }
     }
 }

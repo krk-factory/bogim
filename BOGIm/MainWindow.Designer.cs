@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.plikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.wczytajPlikToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,6 +52,7 @@
             this.obrazWyjsciowyLabel = new System.Windows.Forms.Label();
             this.chartHistoWe = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartHistoWy = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.obrazWejsciowyPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.obrazWyjsciowyPictureBox)).BeginInit();
@@ -190,55 +191,65 @@
             // 
             // chartHistoWe
             // 
-            chartArea1.AxisX.IsStartedFromZero = false;
-            chartArea1.AxisX.MajorGrid.Enabled = false;
-            chartArea1.AxisX.MajorTickMark.Enabled = false;
-            chartArea1.AxisX.Minimum = -50D;
-            chartArea1.AxisY.MajorGrid.Enabled = false;
-            chartArea1.AxisY.MajorTickMark.Enabled = false;
-            chartArea1.Name = "ChartArea1";
-            this.chartHistoWe.ChartAreas.Add(chartArea1);
-            legend1.Enabled = false;
-            legend1.Name = "Legend1";
-            this.chartHistoWe.Legends.Add(legend1);
+            chartArea3.AxisX.IsStartedFromZero = false;
+            chartArea3.AxisX.MajorGrid.Enabled = false;
+            chartArea3.AxisX.MajorTickMark.Enabled = false;
+            chartArea3.AxisX.Minimum = -50D;
+            chartArea3.AxisY.MajorGrid.Enabled = false;
+            chartArea3.AxisY.MajorTickMark.Enabled = false;
+            chartArea3.Name = "ChartArea1";
+            this.chartHistoWe.ChartAreas.Add(chartArea3);
+            legend3.Enabled = false;
+            legend3.Name = "Legend1";
+            this.chartHistoWe.Legends.Add(legend3);
             this.chartHistoWe.Location = new System.Drawing.Point(13, 320);
             this.chartHistoWe.Name = "chartHistoWe";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartHistoWe.Series.Add(series1);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chartHistoWe.Series.Add(series3);
             this.chartHistoWe.Size = new System.Drawing.Size(255, 300);
             this.chartHistoWe.TabIndex = 5;
             this.chartHistoWe.Text = "chart1";
             // 
             // chartHistoWy
             // 
-            chartArea2.AxisX.IsStartedFromZero = false;
-            chartArea2.AxisX.MajorGrid.Enabled = false;
-            chartArea2.AxisX.MajorTickMark.Enabled = false;
-            chartArea2.AxisX.Minimum = -50D;
-            chartArea2.AxisY.MajorGrid.Enabled = false;
-            chartArea2.AxisY.MajorTickMark.Enabled = false;
-            chartArea2.Name = "ChartArea1";
-            this.chartHistoWy.ChartAreas.Add(chartArea2);
-            legend2.Enabled = false;
-            legend2.Name = "Legend1";
-            this.chartHistoWy.Legends.Add(legend2);
+            chartArea4.AxisX.IsStartedFromZero = false;
+            chartArea4.AxisX.MajorGrid.Enabled = false;
+            chartArea4.AxisX.MajorTickMark.Enabled = false;
+            chartArea4.AxisX.Minimum = -50D;
+            chartArea4.AxisY.MajorGrid.Enabled = false;
+            chartArea4.AxisY.MajorTickMark.Enabled = false;
+            chartArea4.Name = "ChartArea1";
+            this.chartHistoWy.ChartAreas.Add(chartArea4);
+            legend4.Enabled = false;
+            legend4.Name = "Legend1";
+            this.chartHistoWy.Legends.Add(legend4);
             this.chartHistoWy.Location = new System.Drawing.Point(305, 320);
             this.chartHistoWy.Name = "chartHistoWy";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chartHistoWy.Series.Add(series2);
+            series4.ChartArea = "ChartArea1";
+            series4.Legend = "Legend1";
+            series4.Name = "Series1";
+            this.chartHistoWy.Series.Add(series4);
             this.chartHistoWy.Size = new System.Drawing.Size(256, 300);
             this.chartHistoWy.TabIndex = 6;
             this.chartHistoWy.Text = "chart2";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 623);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(7, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "\r\n";
             // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(573, 638);
+            this.ClientSize = new System.Drawing.Size(573, 648);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.chartHistoWy);
             this.Controls.Add(this.chartHistoWe);
             this.Controls.Add(this.obrazWyjsciowyLabel);
@@ -283,6 +294,7 @@
         private System.Windows.Forms.ToolStripMenuItem lokalneWyrownanieHistogramuToolStripMenuItem;
         public System.Windows.Forms.DataVisualization.Charting.Chart chartHistoWe;
         public System.Windows.Forms.DataVisualization.Charting.Chart chartHistoWy;
+        public System.Windows.Forms.Label label1;
     }
 }
 

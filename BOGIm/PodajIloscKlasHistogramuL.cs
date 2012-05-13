@@ -40,8 +40,10 @@ namespace BOGIm
                 operacja = false;
             }
             if (iloscBlokow != 16 && iloscBlokow != 32)
+            {
                 MessageBox.Show("Rozmiar bloku musi wynosić 16 lub 32.");
                 operacja_b = false;
+            }
 
 
             this.Close();
