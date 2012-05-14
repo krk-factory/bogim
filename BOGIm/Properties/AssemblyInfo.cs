@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("BOGIm - Basic Operations on a Grayscale Images")]
-[assembly: AssemblyDescription("Program wykonany przez Łukasza Krauzowicza jako projekt z przedmiotu Analiza i Przetwarzanie Obrazów")]
+[assembly: AssemblyDescription("Program wykonany przez Łukasza Krauzowicza, Przemka Szemlę, Kamila Rokałskiego, Kubę Konika i Michała Wysokiński jako projekt z przedmiotu Analiza i Przetwarzanie Obrazów")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("AGH&QNC&CERN")]
 [assembly: AssemblyProduct("BOGIm")]
 [assembly: AssemblyCopyright("Copyright ©  2012")]
 [assembly: AssemblyTrademark("")]
